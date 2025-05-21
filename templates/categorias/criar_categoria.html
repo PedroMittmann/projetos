@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Criar Categoria{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Adicionar Nova Categoria</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.csrf_token }} {# Campo CSRF token para segurança #}
+                    <div class="mb-3">
+                        {{ form.nome.label(class="form-label") }}
+                        {{ form.nome(class="form-control", autocomplete="off") }}
+                        {% if form.nome.errors %}
+                            <div class="text-danger">
+                                {% for error in form.nome.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

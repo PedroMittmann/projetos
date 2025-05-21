@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Início{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center bg-light p-5 rounded shadow-sm">
+    <h1 class="display-4">Bem-vindo ao MittSoft!</h1>
+    <p class="lead">Seu sistema de controle de vendas e estoque simplificado.</p>
+    <hr class="my-4">
+    <p>Use a navegação acima para gerenciar categorias e produtos.</p>
+    <a class="btn btn-primary btn-lg me-2" href="{{ url_for('nova_categoria') }}" role="button">Adicionar Categoria</a>
+    <a class="btn btn-success btn-lg" href="{{ url_for('novo_produto') }}" role="button">Adicionar Produto</a>
+</div>
+{% endblock %}

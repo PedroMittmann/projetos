@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Criar Produto{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Adicionar Novo Produto</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.csrf_token }}
+                    <div class="mb-3">
+                        {{ form.nome.label(class="form-label") }}
+                        {{ form.nome(class="form-control", autocomplete="off") }}
+                        {% if form.nome.errors %}
+                            <div class="text-danger">
+                                {% for error in form.nome.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.descricao.label(class="form-label") }}
+                        {{ form.descricao(class="form-control", rows=4) }}
+                        {% if form.descricao.errors %}
+                            <div class="text-danger">
+                                {% for error in form.descricao.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            {{ form.preco.label(class="form-label") }}
+                            {{ form.preco(class="form-control") }}
+                            {% if form.preco.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.preco.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            {{ form.quantidade_estoque.label(class="form-label") }}
+                            {{ form.quantidade_estoque(class="form-control") }}
+                            {% if form.quantidade_estoque.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.quantidade_estoque.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.categoria.label(class="form-label") }}
+                        {{ form.categoria(class="form-select") }}
+                        {% if form.categoria.errors %}
+                            <div class="text-danger">
+                                {% for error in form.categoria.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

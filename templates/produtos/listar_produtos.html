@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Produtos{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">Produtos Cadastrados</h1>
+    <a href="{{ url_for('novo_produto') }}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Novo Produto
+    </a>
+</div>
+
+{% if produtos %}
+    <div class="table-responsive">
+        <table class="table table-hover table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome do Produto</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Estoque</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Data de Adição</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto in produtos %}
+                <tr>
+                    <td>{{ produto.id }}</td>
+                    <td>{{ produto.nome }}</td>
+                    <td>{{ produto.descricao | truncate(50, True) }}</td> {# Trunca a descrição para não ficar muito longa #}
+                    <td>R$ {{ "%.2f"|format(produto.preco) }}</td>
+                    <td>{{ produto.quantidade_estoque }}</td>
+                    <td>{{ produto.categoria.nome }}</td> {# Acessa o nome da categoria relacionada #}
+                    <td>{{ produto.data_adicao.strftime('%d/%m/%Y %H:%M') }}</td>
+                    <td>
+                        <a href="#" class="btn btn-sm btn-info text-white me-2">Editar</a>
+                        <a href="#" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="alert alert-info" role="alert">
+        Nenhum produto cadastrado ainda. <a href="{{ url_for('novo_produto') }}" class="alert-link">Clique aqui para adicionar um.</a>
+    </div>
+{% endif %}
+{% endblock %}
